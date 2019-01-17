@@ -22,11 +22,8 @@ import com.ugos.jiprolog.engine.JIPTermParser;
 import java.nio.file.Files;
 import java.util.PriorityQueue ;
 
-/* 2nd Prog se Java | Prolog, ARTIFICIAL INTELLIGENCE
- *
- * ΚΟΝΤΟΓΙΑΝΝΗΣ ΑΝΔΡΕΑΣ 	ΠΕΠΠΑΣ ΠΑΝΑΓΙΩΤΗΣ 
- *	03115187		03115146
- *
+/* Java | Prolog, ARTIFICIAL INTELLIGENCE
+ * Taxi AI Project
  *
  */
 
@@ -34,9 +31,9 @@ import java.util.PriorityQueue ;
 public class Proj {
 
 	static int count_nodes = 0;
-    	static double clientX = 0.0, clientY = 0.0, x_dest = 0.0, y_dest = 0.0;
-    	static int persons = 0, luggage = 0, time = 0;
-    	static String language;
+    static double clientX = 0.0, clientY = 0.0, x_dest = 0.0, y_dest = 0.0;
+    static int persons = 0, luggage = 0, time = 0;
+    static String language;
 	static ArrayList<Node> nodes = new ArrayList<>(154404);
 	static Node client_node;
    	static JIPEngine jip = new JIPEngine();
@@ -67,7 +64,7 @@ public class Proj {
 
 
 	// argv[0] client.csv, argv[1] taxis.csv, argv[2] nodes.csv
-    	public static void main(String[] args) throws FileNotFoundException, JIPSyntaxErrorException, IOException {
+    	public static void main(String[] args) throws FileNotFoundException, 			  JIPSyntaxErrorException, IOException {
 
 		LinkedList<Taxi> taxis = new LinkedList<>();
 		LinkedList<Taxi> avail_taxis = new LinkedList<>();
