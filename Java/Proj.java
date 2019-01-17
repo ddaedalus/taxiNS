@@ -300,15 +300,12 @@ public class Proj {
 
 		JIPEngine jip2 = new JIPEngine();
 		JIPEngine jip3 = new JIPEngine();
-		JIPEngine jip4 = new JIPEngine();
 		jip1.consultFile("lineObstacle.pl");
 		jip2.consultFile("lineOneway.pl");
 		jip3.consultFile("lineLanes.pl");
-		jip4.consultFile("rules.pl");
 		parser1 = jip1.getTermParser();
 		JIPTermParser parser2 = jip2.getTermParser();
 	   	JIPTermParser parser3 = jip3.getTermParser();
-	  	JIPTermParser parser4 = jip4.getTermParser();
 
 		int count_avail = 0;
 
@@ -330,7 +327,7 @@ public class Proj {
     		term = jipQuery.nextSolution();
        		int Lanes = Integer.parseInt(term.getVariablesTable().get("Lanes").toString());
 
-     		jipQuery = jip4.openSynchronousQuery(parser4.parseTerm("findTraffic(" + n.line_id + ", " + time + ", Traffic)."));
+     		jipQuery = jip.openSynchronousQuery(parser.parseTerm("findTraffic(" + n.line_id + ", " + time + ", Traffic)."));
 		   	term = jipQuery.nextSolution();
 		  	String Traffic = "medium";
 		  	int traffic_jam = 0;
@@ -395,7 +392,6 @@ public class Proj {
 
 			}
 			writer5.flush();
-*/
 		}
 
 		sort_avail_nodes.sort(Comparator.comparing(Node:: getX));
@@ -523,24 +519,10 @@ public class Proj {
 					taxi_node = n;
 				}
 			}
-		
-			count = 0;
-		
-			// Delete files of closure and front
-			File file = new File("closure.pl");
-			Files.deleteIfExists(file.toPath());
-			out0 = new FileOutputStream("closure.pl", true);
-			writer0 = new OutputStreamWriter(out0, "UTF-8");
 
 			closure = new int [154404];
 			for (int i=0; i<154404; i++)
 				closure[i] = 0;
-
-			Make new files of closure and front
-			OutputStream out22 = new FileOutputStream("closure.pl", true);
-       		Writer writer22 = new OutputStreamWriter(out22, "UTF-8");
-			OutputStream out43 = new FileOutputStream("front.pl", true);
-       		Writer writer43 = new OutputStreamWriter(out43, "UTF-8");
 
 		  	jipQuery = jip.openSynchronousQuery(parser.parseTerm("findF(" + taxi_node.node_id + ", F)."));
 	   		term = jipQuery.nextSolution();
@@ -549,8 +531,6 @@ public class Proj {
 			Front = new PriorityQueue<FrontTuple>();
 			FrontTuple ft = new FrontTuple((int) (taxi_node.node_id), Ftaxi, 154404);
 			Front.add(ft);
-			writer43.append("front(" + taxi_node.node_id + ", " + Ftaxi + ").");
-			writer43.append('\n');
 
 			final_node_id = 0;
 
