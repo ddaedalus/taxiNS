@@ -1,13 +1,10 @@
-Run on terminal:
+:computer:Run on terminal:
 java Proj client.csv taxis.csv nodes.csv lines.csv traffic.csv
 
-
-https://github.com/jiprolog/jiprolog/releases/download/4.1.4.1/JIProlog-4.1.4.1.zip
-
-Jiprolog was used to combine Java with Prolog
+:heavy_check_mark: Jiprolog was used to combine Java with Prolog (https://github.com/jiprolog/jiprolog/releases/download/4.1.4.1/JIProlog-4.1.4.1.zip)
 
 
-# TEAM
+# TEAM :oncoming_taxi: :oncoming_taxi:
 Τo project αποτέλεσε ομαδική δουλειά των: 
  <p>:black_circle:Andreas Kontogiannis 
  <p>:black_circle:Panagiotis Peppas 
