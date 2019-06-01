@@ -6,8 +6,8 @@ java Proj client.csv taxis.csv nodes.csv lines.csv traffic.csv
 
 # TEAM :oncoming_taxi: :oncoming_taxi:
 Τo project αποτέλεσε ομαδική δουλειά των: 
- <p>:black_circle:Andreas Kontogiannis 
- <p>:black_circle:Panagiotis Peppas 
+ <p>:small_blue_diamond:Andreas Kontogiannis 
+ <p>:small_blue_diamond:Panagiotis Peppas 
  
 # ΣΚΟΠΟΣ
 Σκοπός της άσκησης είναι η δημιουργία ενός συστήματος τεχνητής
