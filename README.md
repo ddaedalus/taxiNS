@@ -9,8 +9,8 @@ Jiprolog was used to combine Java with Prolog
 
 # TEAM
 Τo project αποτέλεσε ομαδική δουλειά των: 
- - Andreas Kontogiannis
- - Panagiotis Peppas
+ <p>:black_circle:Andreas Kontogiannis 
+ <p>:black_circle:Panagiotis Peppas 
  
 # ΣΚΟΠΟΣ
 Σκοπός της άσκησης είναι η δημιουργία ενός συστήματος τεχνητής
@@ -81,24 +81,24 @@ O(n*logn) καθώς έχουμε n δεδομένα και το Priority Queue 
 λεπτό για να δώσει την τελική ολοκληρωτική απάντηση.Το αρχείο rules.pl με τους κανονες της Prolog περιλαμβάνει αρχικά
 κάποια includes ώστε να μπορεί να ψάξει στα γεγονότα της Prolog και
 στην συνέχεια αναλυτικά τους εξής κανόνες:
-- findF(X,F)
+<p>:black_circle: findF(X,F)
 Το οποίο παίρνει έναν κόμβο X και επιστρέφει την F του δηλ. την
 ευριστική του κόμβου
-- findLane(Line_id, Lanes)
+<p>:black_circle: findLane(Line_id, Lanes)
 Που παίρνει ένα lineid και επιστρέφει τα Lanes του αντίστοιχου line
-- floorTime(Time, StartTime, EndTime)
+<p>:black_circle: floorTime(Time, StartTime, EndTime)
 Που παίρνει ένα time (του πελάτη) και φτιάχνει τα όρια στα οποία αυτό
 εντάσσεται σύμφωνα με τα δεδομένα της εκφώνησης για την κίνηση
-- findTraffic(Line_id, Time, Traffic)
+<p>:black_circle: findTraffic(Line_id, Time, Traffic)
 Που παίρνει ένα lineid και ένα χρόνο time και επιστρέφει την κίνηση που
 έχει η συγκεκριμένη γραμμή-οδός το συγκεκριμένο χρόνο
-- findXY(Id, X, Y)
+<p>:black_circle: findXY(Id, X, Y)
 Που παίρνει ένα id ενός κόμβους και επιστρέφει τις συντεταγμένες του
-- findNext(X, Y, Gy, Fx, Fy)
+<p>:black_circle: findNext(X, Y, Gy, Fx, Fy)
 Που παίρνει ένα id του κόμβου Χ και επιστρέφει όλους του τους γείτονες
 δηλαδή τους κόμβους με τους οποίους συνδέεται. Το Υ είναι το id των
 κόμβων αυτών και τα Gy, Fx, Fy είναι τιμές των κόμβων που
-χρησιμοποιούνται για τον υπολογισμό της συνολικής ευριστικής.
+χρησιμοποιούνται για τον υπολογισμό της συνολικής ευριστικής. <\p>
 # Ο ΑΛΓΟΡΙΘΜΟΣ
 Για την υλοποίηση του Αλγορίθμου, αρχικά βρίσκουμε τον κόμβο
 που είναι κοντινότερος στη θέση του πελάτη και τον βάζουμε ως στόχο
