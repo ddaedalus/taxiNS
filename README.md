@@ -10,6 +10,6 @@ Team comprises of:
  <p>:small_blue_diamond:[Andreas Kontogiannis](https://github.com/ddaedalus)   
  <p>:small_blue_diamond:Panagiotis Peppas   
 
-![screenshot](/KML Files/kml_best_taxi.png)
+![screenshot](/KML_Files/kml_best_taxi.png)
  
 
