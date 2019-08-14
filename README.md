@@ -6,8 +6,8 @@ java Proj client.csv taxis.csv nodes.csv lines.csv traffic.csv
 
 
 # The Team :oncoming_taxi: :oncoming_taxi:   
- <p>:small_blue_diamond:[Andreas Kontogiannis](https://github.com/ddaedalus)   
- <p>:small_blue_diamond:Panagiotis Peppas   
+:oncoming_taxi: [Andreas Kontogiannis](https://github.com/ddaedalus)   
+:oncoming_taxi: Panagiotis Peppas   
           
 # Optimal Route displayed in Google Maps 
 ![screenshot](kml_best_taxi.png)
