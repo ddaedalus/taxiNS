@@ -3,6 +3,7 @@
 ```
 cp -R data/. java/
 cp -R prolog/. java/
+cd java
 java Proj client.csv taxis.csv nodes.csv lines.csv traffic.csv
 ```
    
