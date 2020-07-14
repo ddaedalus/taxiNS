@@ -17,6 +17,3 @@ A smart taxi navigation system developed in Java and Prolog (Jiprolog was used t
           
 ## Optimal Route displayed in Google Maps 
 ![screenshot](kml_best_taxi.png)
- 
-
-
