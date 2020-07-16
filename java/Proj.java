@@ -27,8 +27,8 @@ import java.util.PriorityQueue ;
  *
  */
 
-
 public class Proj {
+	// This is the main class that uses A* with Java and Jiprolog 
 
 	static int count_nodes = 0;
 	static double clientX = 0.0, clientY = 0.0, x_dest = 0.0, y_dest = 0.0;
@@ -70,24 +70,24 @@ public class Proj {
 		LinkedList<Taxi> avail_taxis = new LinkedList<>();
 
 		out0 = new FileOutputStream("closure.pl", true);
-	  	writer0 = new OutputStreamWriter(out0, "UTF-8");
+		writer0 = new OutputStreamWriter(out0, "UTF-8");
 
 		jip.consultFile("rules.pl");
-     	parser = jip.getTermParser();
+		parser = jip.getTermParser();
 
 		/* CSV Reader
 		 *
 		 */		
 		// CSV Reader client.csv
-        scanner = new Scanner(new FileReader(args[0]));
-        // Cut X, Y, X_dest, Y_dest, time, persons, language, luggage
-        String line = scanner.nextLine();
+		scanner = new Scanner(new FileReader(args[0]));
+		// Cut X, Y, X_dest, Y_dest, time, persons, language, luggage
+		String line = scanner.nextLine();
 		line = scanner.nextLine();
-        // Get X, Y, X_dest, Y_dest, time, persons, language, luggage
-        spl = line.split(",");
-        clientX = Double.parseDouble(spl[0]);
-        clientY = Double.parseDouble(spl[1]);
-        x_dest = Double.parseDouble(spl[2]);
+		// Get X, Y, X_dest, Y_dest, time, persons, language, luggage
+		spl = line.split(",");
+		clientX = Double.parseDouble(spl[0]);
+		clientY = Double.parseDouble(spl[1]);
+		x_dest = Double.parseDouble(spl[2]);
 		y_dest = Double.parseDouble(spl[3]);
 
 		String the_time = spl[4];
@@ -97,10 +97,10 @@ public class Proj {
 		persons = Integer.parseInt(spl[5]);
 		language = spl[6];
 		luggage = Integer.parseInt(spl[7]);
-        scanner.close();
+		scanner.close();
 
 		// CSV Reader taxis.csv
-        scanner = new Scanner(new FileReader(args[1]));
+		scanner = new Scanner(new FileReader(args[1]));
 		// Cut X,Y,id,available,capacity,languages,rating,long_distance,type
 		line = scanner.nextLine();
 		// Get X,Y,id,available,capacity,languages,rating,long_distance,type
@@ -113,17 +113,17 @@ public class Proj {
 		while (scanner.hasNextLine()) {
 			line = scanner.nextLine();
 			spl = line.split(",");
-        	taxiX = Double.parseDouble(spl[0]);
+			taxiX = Double.parseDouble(spl[0]);
 			taxiY = Double.parseDouble(spl[1]);
 			id = Integer.parseInt(spl[2]);
 			available = spl[3];
 
 			String [] capacity_spl = spl[4].split("-");
 			capacity = Integer.parseInt(capacity_spl[1]);
-			
+
 			languages = new LinkedList<>();
 			langs_spl = spl[5].split("/");
-			for (String s : langs_spl) 
+			for (String s : langs_spl) 		
 				languages.addLast(s);
 	
 			rating = Float.parseFloat(spl[6]);
@@ -144,43 +144,42 @@ public class Proj {
 					}
 				}
 			}
-
 			if (avail) {
 				avail_taxis.addFirst(t);
 				// k = count_avail_taxis
 				count_avail_taxis++;
 			}
 		}
-        scanner.close();
+		scanner.close();
 
-        // CSV Reader nodes.csv  
+		// CSV Reader nodes.csv  
 		Writer writer1 = null;
 		writer1 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("belongsTo.pl"), "utf-8"));
 
-        scanner = new Scanner(new FileReader(args[2]));
-        // Cut X,Y,line_id,node_id,name
-    	line = scanner.nextLine();
-    	// Get X,Y,line_id,node_id,name
-    	double nodeX = 0.0, nodeY = 0.0;
-    	long line_id;
+		scanner = new Scanner(new FileReader(args[2]));
+		// Cut X,Y,line_id,node_id,name
+		line = scanner.nextLine();
+		// Get X,Y,line_id,node_id,name
+		double nodeX = 0.0, nodeY = 0.0;
+		long line_id;
 		long node_id;
 		count_nodes = 0;
-        while (scanner.hasNextLine()) {
-            line = scanner.nextLine();
-            spl = line.split(",");
-            nodeX = Double.parseDouble(spl[0]);
-            nodeY = Double.parseDouble(spl[1]);
+		while (scanner.hasNextLine()) {
+			line = scanner.nextLine();
+			spl = line.split(",");
+			nodeX = Double.parseDouble(spl[0]);
+			nodeY = Double.parseDouble(spl[1]);
 			line_id = Integer.parseInt(spl[2]);
-            node_id = count_nodes;
-        	Node n = new Node(nodeX, nodeY, line_id, node_id);
-    		nodes.add(n);
+			node_id = count_nodes;
+			Node n = new Node(nodeX, nodeY, line_id, node_id);
+			nodes.add(n);
 			String str = "belongsTo(" + node_id + ", " + line_id + ").";
 			writer1.append(str);
 			writer1.append('\n');
 			writer1.flush();
 			count_nodes++;
-    	}
-        scanner.close();
+		}
+		scanner.close();
 
 		OutputStream out2 = new FileOutputStream("lineOneway.pl", true);
 		Writer writer2 = new OutputStreamWriter(out2, "UTF-8");  
@@ -191,14 +190,14 @@ public class Proj {
 		OutputStream out6 = new FileOutputStream("lineLanes.pl", true);
 		Writer writer6 = new OutputStreamWriter(out6, "UTF-8"); 
 
-    	// CSV Reader lines.csv
-	   	Scanner scanner4 = new Scanner(new FileReader(args[3]));
-        /* 
-		 * Cut id, highway, name, oneway, lit, lanes, maxspeed, railway, boundary, access, natural, barrier, tunnel, bridge,incline, 				waterway,
-		 * busway, toll
-		 */
+		// CSV Reader lines.csv
+		Scanner scanner4 = new Scanner(new FileReader(args[3]));
+		/* 
+			* Cut id, highway, name, oneway, lit, lanes, maxspeed, railway, boundary, access, natural, barrier, tunnel, bridge,incline, 				waterway,
+			* busway, toll
+			*/
 		line = scanner4.nextLine();
-        	// Get id(0), oneway(3), lanes(5), maxspeed(6), railway(7), boundary(8), access(9), natural(10), barrier(11), waterway(15)
+		// Get id(0), oneway(3), lanes(5), maxspeed(6), railway(7), boundary(8), access(9), natural(10), barrier(11), waterway(15)
     	int lanes = 0, maxspeed = 0;
 		String oneway, railway, boundary, access, natural, barrier, waterway;
     	while (scanner4.hasNextLine()) {
@@ -215,9 +214,9 @@ public class Proj {
 			}
             try {
             	maxspeed = Integer.parseInt(spl1[6]);
-            	} catch (NumberFormatException e) {
-                	maxspeed = 30;
-            	}
+            } catch (NumberFormatException e) {
+                maxspeed = 30;
+            }
 
 			writer6.append("lineLanes(" + line_id + ", " + lanes + ").");
 			writer6.append('\n');
@@ -237,13 +236,10 @@ public class Proj {
 						|| natural.equals("yes") || barrier.equals("yes")  || waterway.equals("yes")) { 
 				obstacle = "yes";
 			}
-		    	Line ln = new Line(line_id, oneway, lanes, maxspeed, railway, boundary, access, natural, barrier, waterway);
-					
 			String s = "lineObstacle(" + line_id + ", " + obstacle + ").";
 	   		writer3.append(s);
 			writer3.append('\n');	
 			writer3.flush();
-
 			if (obstacle == "no") {
 				s = "lineOneway(" + line_id + ", " + oneway + ").";
 				writer2.write(s);
@@ -251,16 +247,15 @@ public class Proj {
 				writer2.flush();
 			}
 		}
-    	scanner4.close();
-		
+		scanner4.close();
 
 		OutputStream out4 = new FileOutputStream("lineTraffic.pl", true);
 		Writer writer4 = new OutputStreamWriter(out4, "UTF-8");
 
-       	// CSV Reader traffic.csv
-       	Scanner scanner5 = new Scanner(new FileReader(args[4]));
-      	// Cut id, name, traffic_info
-       	ine = scanner5.nextLine();        	
+		// CSV Reader traffic.csv
+		Scanner scanner5 = new Scanner(new FileReader(args[4]));
+		// Cut id, name, traffic_info
+		line = scanner5.nextLine();        	
 		// Get id,traffic_info
 		String s_time;
 		writer4.append("lineTraffic(_, 0, 0, medium).");
@@ -294,8 +289,8 @@ public class Proj {
 		OutputStream out5 = new FileOutputStream("next.pl", true);
 		Writer writer5 = new OutputStreamWriter(out5, "UTF-8");  		      
 
-       	OutputStream out7 = new FileOutputStream("nodeF.pl", true);
-       	Writer writer7 = new OutputStreamWriter(out7, "UTF-8");
+		OutputStream out7 = new FileOutputStream("nodeF.pl", true);
+		Writer writer7 = new OutputStreamWriter(out7, "UTF-8");
 
 
 		JIPEngine jip2 = new JIPEngine();
@@ -305,7 +300,7 @@ public class Proj {
 		jip3.consultFile("lineLanes.pl");
 		parser1 = jip1.getTermParser();
 		JIPTermParser parser2 = jip2.getTermParser();
-	   	JIPTermParser parser3 = jip3.getTermParser();
+		JIPTermParser parser3 = jip3.getTermParser();
 
 		int count_avail = 0;
 
@@ -356,11 +351,9 @@ public class Proj {
 		  	}
 			Fn = dist_factor - lanes_factor + traffic_factor;
 
-
 			writer7.append("nodeF(" + n.node_id + ", " + Fn + ").");
 			writer7.append('\n');
 			writer7.flush();
-
 			
 			if (n.line_id == m.line_id) {
 				double pyth_dist_m = Math.sqrt((clientX - m.x) * (clientX - m.x) + (clientY - m.y) * (clientY - m.y));
@@ -484,7 +477,6 @@ public class Proj {
 			}
 			i++;
 		}
-
 		
 		OutputStream out42 = new FileOutputStream("node.pl", true);
     	Writer writer42 = new OutputStreamWriter(out42, "UTF-8");
@@ -540,6 +532,7 @@ public class Proj {
 			// 154404 is father's id of the taxi_node
 			int taxi_node_id = (int) (taxi_node.node_id);
 		
+			// Initialize ids
 			FrontTuple ftp, gtp;
 			double Gx = Ftaxi;
 			int grandfather_id = 154404;
@@ -562,7 +555,6 @@ public class Proj {
 				if (closure[ftp.id] == 1) 
 					continue;
 				
-			
 				// Add removed element to closure
 				closure[ftp.id] = 1;
 
@@ -606,10 +598,6 @@ public class Proj {
 				path.add(parseId);
 				jipQuery = jip.openSynchronousQuery(parser.parseTerm("findXY(" + parseId + ", X, Y)."));
             							term = jipQuery.nextSolution();
-				
-//				System.out.print(term.getVariablesTable().get("X").toString() + ",");
-//				System.out.println(term.getVariablesTable().get("Y").toString() + ",0");
-
 				parseId = path_list[parseId];
 			}
 
@@ -647,10 +635,7 @@ public class Proj {
 			System.out.println(term.getVariablesTable().get("Y").toString() + ",0");
 		}
 	
-/////////////////////////////////////////
-
 		// Find the path to client destination that the best taxi will follow
-
 		Node dest_node = null;
 		min = 100.0;
   		for (Node n : avail_nodes) {
@@ -662,7 +647,7 @@ public class Proj {
 		}
 
 		jipQuery = jip.openSynchronousQuery(parser.parseTerm("findF(" + dest_node.node_id + ", F)."));
-        	term = jipQuery.nextSolution();
+		term = jipQuery.nextSolution();
 		double Fdest = Double.parseDouble(term.getVariablesTable().get("F").toString());
 
 		closure = new int [154404];
@@ -679,7 +664,6 @@ public class Proj {
 		path = new LinkedList<>();
 
 		// 154404 is father's id of the dest_node
-		
 		FrontTuple ftp, gtp;
 		double Gx = Fdest;
 		int grandfather_id = 154404;
@@ -702,7 +686,6 @@ public class Proj {
 			if (closure[ftp.id] == 1) 
 				continue;
 				
-			
 			// Add removed element to closure
 			closure[ftp.id] = 1;
 
@@ -752,7 +735,5 @@ public class Proj {
 
 			parseId = path_list[parseId];
 		}
-
-
 	}
 }		
